@@ -19,7 +19,7 @@ void setup() {
 
 
 void loop() {
-  potVal = analogRead(potentiometerPin);
+  potVal = analogRead(potentiometerPin); //10 bit number 0 - (2^10)-1 0 - 1023
   volts = (upperLimitVoltage/upperLimitArdType)*potVal;
   ledPower = volts*51.0;
   analogWrite(ledOutputPin, ledPower);
