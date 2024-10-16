@@ -1,3 +1,5 @@
+// Just teaching if/else not
+
 int potentiometerPin = A0; //A0 is a INT as it is hexadecimal NICE!
 int ledOutputPin = 11;
 int br = 9600;
