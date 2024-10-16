@@ -39,7 +39,7 @@ int calculateBrightness(int brightness) {
 }
 
 void loop() {
-  Serial.println("Which LED would you like to light up? (RED, GREEN, BLUE, OR ALL)");
+  Serial.println("Which LED would you like to light up? (RED, GREEN, BLUE, CYAN, MAGENTA, ORANGE OR WHITE)");
   waitForInput();
   String colorInput = Serial.readString();
   Serial.print("What brightness would you like to set the ");
