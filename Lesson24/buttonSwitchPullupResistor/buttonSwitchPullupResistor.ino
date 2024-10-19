@@ -32,12 +32,16 @@ class ColorController {
     bool pressed;
     bool released;
   public:
-    ColorController(Color c, int i, int o){
+    ColorController(Color c, int i, int o, bool internalPull){
       this->defaultState = 1;
       this->color = c;
       this->inputPin = i;
       this->outputPin = o;
-      pinMode(this->inputPin, INPUT);
+      if(internalPull){
+          pinMode(this->inputPin, INPUT_PULLUP);
+      } else {
+          pinMode(this->inputPin, INPUT);
+      }
       pinMode(this->outputPin, OUTPUT);
       this->on = false;
       this->pressed = false;
@@ -86,15 +90,29 @@ class ColorController {
 
 vector<ColorController*> colorControllers;
 
-void setup() {
-  Serial.begin(br);
-  pinMode(internalPullupPin, INPUT_PULLUP);
-  ColorController* redC = new ColorController(RED, redInputPin, redLedPin);
-  ColorController* greenC = new ColorController(GREEN, greenInputPin, greenLedPin);
-  ColorController* blueC = new ColorController(BLUE, blueInputPin, blueLedPin);
+void lesson26(){
+  ColorController* redC = new ColorController(RED, redInputPin, redLedPin, false);
+  ColorController* greenC = new ColorController(GREEN, greenInputPin, greenLedPin, false);
+  ColorController* blueC = new ColorController(BLUE, blueInputPin, blueLedPin, false);
   colorControllers.push_back(redC);
   colorControllers.push_back(greenC);
   colorControllers.push_back(blueC);
+}
+
+void lesson27(){
+  ColorController* redC = new ColorController(RED, redInputPin, redLedPin, true);
+  ColorController* greenC = new ColorController(GREEN, greenInputPin, greenLedPin, true);
+  ColorController* blueC = new ColorController(BLUE, blueInputPin, blueLedPin, true);
+  colorControllers.push_back(redC);
+  colorControllers.push_back(greenC);
+  colorControllers.push_back(blueC);
+}
+
+void setup() {
+  Serial.begin(br);
+  pinMode(internalPullupPin, INPUT_PULLUP);
+  // lesson26();
+  lesson27();
 }
 
 void updateLED(ColorController* c){
