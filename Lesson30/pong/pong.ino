@@ -20,12 +20,13 @@ int downPin = 11;
 int ROWS = 8;
 int COLS = 12;
 int dt = 200;
-int bounceDelay = 100;
+int bounceDelay = 50;
 int br = 9600;
 int dir;
+bool ballFrame = true;
 bool gameOver = false;
 String lowScoreMessage = "YOU'RE TRASH KID";
-String gameOverMessage = "GAME OVER LOSER. Score: ";
+String gameOverMessage = "GAME OVER. Score: ";
 enum PongType {
   PLAYER,
   BALL
@@ -170,12 +171,14 @@ void pong() {
     }
   }
   setLocation(player);
-  if (!checkLocation(ball, player)) {
-    gameOver = true;
-    matrix.end();
-    return;
+  if(ballFrame){
+    if (!checkLocation(ball, player)) {
+      gameOver = true;
+      matrix.end();
+      return;
+    }
+    setLocation(ball);
   }
-  setLocation(ball);
   delay(bounceDelay);
 }
 
@@ -187,6 +190,7 @@ void setup() {
 
 void loop() {
   while (!gameOver) {
+    ballFrame = !ballFrame;
     pong();
   }
   delay(100);
