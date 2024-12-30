@@ -123,7 +123,6 @@ void pongSetup() {
   downButton = new Button(downPin);
 }
 
-
 void sendMessage(String msg){
   matrix.beginDraw();
   matrix.textScrollSpeed(100);
@@ -136,6 +135,7 @@ void sendMessage(String msg){
 
 bool touchingPlayer(PongObject& obj, PongObject& player){
   if(player.y == obj.y){
+    //could check if in range based on paddle size (paddle size must be 1,3,5 )
     if(player.x == obj.x || player.x+1 == obj.x || player.x-1 == obj.x){
       player.score += 1;
       return true;
@@ -174,7 +174,7 @@ void pong() {
   if(ballFrame){
     if (!checkLocation(ball, player)) {
       gameOver = true;
-      matrix.end();
+      m atrix.end();
       return;
     }
     setLocation(ball);

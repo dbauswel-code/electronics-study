@@ -45,7 +45,7 @@ void Lesson22HomeWork(){
 }
 
 void loop() {
-  Lesson22HomeWork();
+  inClass();
 }
 
 //servo + potentionmeter
